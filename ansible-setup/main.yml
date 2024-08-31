@@ -1,0 +1,17 @@
+---
+- name: Provision and Configure a Web Server
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install Nginx on Debian-based systems
+      apt:
+        name: nginx
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Start and enable Nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: true
