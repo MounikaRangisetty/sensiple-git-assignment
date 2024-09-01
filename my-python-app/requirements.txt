@@ -1,0 +1,3 @@
+# Example requirements for a Python application
+flask
+requests
