@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: python-app
-        image: <your-docker-username>/my-python-app:latest  # Replace with your Docker image
+        image: mounikarangisetty/my-python-app:latest  # Replace with your Docker image
         ports:
         - containerPort: 80  # Port your application is running on
 
