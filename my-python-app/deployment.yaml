@@ -1,3 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-python-app
+spec:
+  replicas: 2  # Number of pods to run
+  selector:
+    matchLabels:
+      app: my-python-app
+  template:
+    metadata:
+      labels:
+        app: my-python-app
+    spec:
+      containers:
+      - name: python-app
+        image: <your-docker-username>/my-python-app:latest  # Replace with your Docker image
+        ports:
+        - containerPort: 80  # Port your application is running on
+
 ---apiVersion: v1kind: Servicemetadata:
   name: my-python-app-servicespec:
   selector:
