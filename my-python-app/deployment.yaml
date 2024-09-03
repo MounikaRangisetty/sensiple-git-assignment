@@ -1,0 +1,9 @@
+---apiVersion: v1kind: Servicemetadata:
+  name: my-python-app-servicespec:
+  selector:
+    app: my-python-app
+  ports:
+  - protocol: TCP
+    port: 80  # Service port
+    targetPort: 80  # Port where the app is running inside the container
+  type: LoadBalancer  # Exposes the service externally (use NodePort if not using cloud provider)
