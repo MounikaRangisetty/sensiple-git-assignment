@@ -1,33 +1,17 @@
-# Stage 1: Build stage
-FROM python:3.8-slim AS builder
-
-# Set the working directory
-WORKDIR /my-python-app
-
-# Install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the application source code
-COPY . .
-
-# Stage 2: Final stage
+# Use an official Python runtime as a parent image
 FROM python:3.8-slim
 
+# Set the working directory in the container
 WORKDIR /my-python-app
 
-# Copy only the necessary files from the builder stage
-COPY --from=builder /my-python-app /my-python-app
+# Copy the current directory contents into the container at /app
+COPY . /my-python-app
 
-# Set environment variables
-ENV APP_ENV=production
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port
+# Make port 80 available to the world outside this container
 EXPOSE 80
-
-# Define a health check
-HEALTHCHECK CMD curl --fail http://localhost:80 || exit 1
 
 # Run the application
 CMD ["python", "addition.py"]
-
