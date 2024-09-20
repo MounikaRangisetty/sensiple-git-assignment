@@ -1,16 +1,13 @@
-"""
-This module performs addition operations.
-"""
+from flask import Flask, request, jsonify
 
-def add(x, y):
-    """
-    Add two numbers and return the result.
+app = Flask(__name__)
 
-    Args:
-        x (int/float): The first number.
-        y (int/float): The second number.
+@app.route('/add', methods=['GET'])
+def add():
+    x = request.args.get('x', type=float)
+    y = request.args.get('y', type=float)
+    result = x + y
+    return jsonify({"result": result})
 
-    Returns:
-        int/float: The sum of the two numbers.
-    """
-    return x + y
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=80)
