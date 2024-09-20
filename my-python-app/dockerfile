@@ -1,17 +1,28 @@
-# Use an official Python runtime as a parent image
-FROM python:3.8-slim
+# Stage 1: Use an official Python runtime as the base image
+FROM python:3.8-slim as base
 
-# Set the working directory in the container
+# Set the working directory inside the container
 WORKDIR /my-python-app
 
-# Copy the current directory contents into the container at /app
-COPY . /my-python-app
+# Copy the requirements file first to leverage caching during the build process
+COPY requirements.txt .
 
-# Install any needed packages specified in requirements.txt
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 80 available to the world outside this container
-EXPOSE 80
+# Copy the rest of the application code into the container
+COPY . .
 
-# Run the application
+# Set environment variables
+ENV APP_ENV=production
+ENV DEBUG=False
+
+# Expose the port the app will run on (adjust if necessary)
+EXPOSE 5000  # Assuming the app runs on port 5000, adjust if needed
+
+# Add a health check to ensure the container is running correctly
+# Example: Assuming the app exposes a health endpoint or serves HTTP traffic
+HEALTHCHECK CMD curl --fail http://localhost:5000/health || exit 1
+
+# Set the default command to run the application
 CMD ["python", "addition.py"]
