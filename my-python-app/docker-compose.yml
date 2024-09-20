@@ -2,14 +2,19 @@ version: '3.8'
 
 services:
   app:
-    image: mounikarangisetty/my-python-app:latest
+    image: mounikarangisetty/my-python-app:1.0.0
     environment:
       - APP_ENV=production
     ports:
       - "80:80"
     healthcheck:
-      test: ["CMD", "curl", "--fail", "http://localhost:80"]
+      test: ["CMD", "curl", "--fail", "http://localhost:5000"]
       interval: 1m30s
       timeout: 10s
       retries: 3
       start_period: 40s
+    volumes:
+      - mydata:/path/in/container
+
+volumes:
+  mydata:
