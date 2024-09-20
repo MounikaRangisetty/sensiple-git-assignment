@@ -6,7 +6,7 @@ WORKDIR /my-python-app
 
 # Copy the requirements file first to leverage caching during the build process
 COPY requirements.txt .
-COPY addition.py .
+COPY . .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
