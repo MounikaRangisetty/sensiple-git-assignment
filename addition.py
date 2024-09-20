@@ -6,6 +6,10 @@ app = Flask(__name__)
 def add():
     x = request.args.get('x', type=float)
     y = request.args.get('y', type=float)
+    
+    if x is None or y is None:
+        return jsonify({"error": "Missing parameters x or y"}), 400
+
     result = x + y
     return jsonify({"result": result})
 
