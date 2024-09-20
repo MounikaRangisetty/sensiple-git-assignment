@@ -18,10 +18,9 @@ ENV APP_ENV=production
 ENV DEBUG=False
 
 # Expose the port the app will run on (adjust if necessary)
-EXPOSE 5000  # Assuming the app runs on port 5000, adjust if needed
+EXPOSE 5000  # Ensure this matches the port used in app.run()
 
 # Add a health check to ensure the container is running correctly
-# Example: Assuming the app exposes a health endpoint or serves HTTP traffic
 HEALTHCHECK CMD curl --fail http://localhost:5000/health || exit 1
 
 # Set the default command to run the application
