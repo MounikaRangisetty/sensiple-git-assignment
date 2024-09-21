@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: my-python-app
 spec:
-  replicas: 2  # Number of pods to run
+  replicas: 2  
   selector:
     matchLabels:
       app: my-python-app
@@ -14,16 +14,20 @@ spec:
     spec:
       containers:
       - name: python-app
-        image: mounikarangisetty/my-python-app:latest  # Replace with your Docker image
+        image: mounikarangisetty/my-python-app:latest  
         ports:
-        - containerPort: 80  # Port your application is running on
+        - containerPort: 5000 
 
----apiVersion: v1kind: Servicemetadata:
-  name: my-python-app-servicespec:
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-python-app-service
+spec:
   selector:
     app: my-python-app
   ports:
   - protocol: TCP
-    port: 80  # Service port
-    targetPort: 80  # Port where the app is running inside the container
-  type: LoadBalancer  # Exposes the service externally (use NodePort if not using cloud provider)
+    port: 80 
+    targetPort: 5000 
+  type: LoadBalancer
