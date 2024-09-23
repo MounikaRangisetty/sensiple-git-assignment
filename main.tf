@@ -15,7 +15,7 @@ resource "aws_instance" "my_app" {
 
 # Provision an S3 bucket
 resource "aws_s3_bucket" "my_bucket" {
-  bucket = "my-unique-bucket-for-my-app"
+  bucket = "my-unique-bucket-for-my-app2"
   acl    = "private"
 }
 
