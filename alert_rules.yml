@@ -1,0 +1,17 @@
+
+groups:
+- name: example
+  rules:
+  - alert: screpedurationalert
+    expr: scrape_duration_seconds{job="my_python_app"} > 0.1
+    for: 5s
+    labels:
+      severity: warning
+    annotations:
+      summary: "High request latency detected"
+      description: "Request latency is above 0.5 seconds for more than 5 seconds."
+
+
+
+
+
