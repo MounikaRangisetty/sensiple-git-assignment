@@ -1,17 +1,24 @@
-from flask import Flask, request, jsonify
+from flask import Flask
+from prometheus_client import start_http_server, Summary, Counter, Gauge, generate_latest
 
 app = Flask(__name__)
 
-@app.route('/add', methods=['GET'])
-def add():
-    x = request.args.get('x', type=float)
-    y = request.args.get('y', type=float)
-    
-    if x is None or y is None:
-        return jsonify({"error": "Missing parameters x or y"}), 400
+# Example metrics
+REQUESTS = Counter('http_requests_total', 'Total HTTP Requests')
+IN_PROGRESS = Gauge('inprogress_requests', 'In Progress Requests')
+LATENCY = Summary('request_latency_seconds', 'Request Latency')
 
-    result = x + y
-    return jsonify({"result": result})
+@app.route('/')
+def index():
+    REQUESTS.inc()
+    with IN_PROGRESS.track_inprogress():
+        return "Hello, World!"
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80)
+@app.route('/metrics')
+def metrics():
+    return generate_latest(), 200, {'Content-Type': 'text/plain'}
+
+if __name__ == '__main__':
+    # Start Prometheus metrics HTTP server
+    start_http_server(8000)  # Expose Prometheus metrics on port 8000
+    app.run(host='0.0.0.0', port=5000)
