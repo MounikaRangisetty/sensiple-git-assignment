@@ -21,4 +21,4 @@ def metrics():
 if __name__ == '__main__':
     # Start Prometheus metrics HTTP server
     start_http_server(8000)  # Expose Prometheus metrics on port 8000
-    app.run(host='0.0.0.0', port=3000)  # Run Flask app on port 6000
+    app.run(host='0.0.0.0', port=4000)  # Run Flask app on port 6000
