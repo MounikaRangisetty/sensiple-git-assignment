@@ -4,7 +4,7 @@ services:
     environment:
       - APP_ENV=production
     ports:
-      - "5000:5000"
+      - "6000:6000"
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:5000/health"]
       interval: 1m30s
