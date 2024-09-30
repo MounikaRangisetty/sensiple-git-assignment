@@ -12,4 +12,4 @@ rule_files:
 scrape_configs:
   - job_name: 'my_python_app'
     static_configs:
-      - targets: ['http://13.233.92.61:4000/metrics']  # Your application metrics endpoint
+      - targets: ['localhost:8000']  # Your application metrics endpoint
