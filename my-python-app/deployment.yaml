@@ -16,7 +16,7 @@ spec:
       - name: python-app
         image: mounikarangisetty/my-python-app:latest  
         ports:
-        - containerPort: 5000 
+        - containerPort: 6000 
 
 ---
 apiVersion: v1
@@ -29,5 +29,5 @@ spec:
   ports:
   - protocol: TCP
     port: 80 
-    targetPort: 5000 
+    targetPort: 6000 
   type: LoadBalancer
