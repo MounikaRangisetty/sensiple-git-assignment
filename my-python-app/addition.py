@@ -1,20 +1,24 @@
 from flask import Flask
-from prometheus_client import start_http_server, Gauge
-import random
-import time
+from prometheus_client import start_http_server, Summary, Counter, Gauge, generate_latest
 
 app = Flask(__name__)
 
-# Create a metric to track availability
-availability_metric = Gauge('app_availability', 'Availability of the app')
+# Example metrics
+REQUESTS = Counter('http_requests_total', 'Total HTTP Requests')
+IN_PROGRESS = Gauge('inprogress_requests', 'In Progress Requests')
+LATENCY = Summary('request_latency_seconds', 'Request Latency')
+
+@app.route('/')
+def index():
+    REQUESTS.inc()  # Increment total HTTP requests count
+    with IN_PROGRESS.track_inprogress():  # Track in-progress requests
+        return "Hello, World!"
 
 @app.route('/metrics')
 def metrics():
-    # Here you would return the actual metrics, for demo purposes, we simulate random availability
-    availability_value = random.choice([0, 1])  # Randomly returns 0 or 1 for demo
-    availability_metric.set(availability_value)
-    return "Metrics updated", 200
+    return generate_latest(), 200, {'Content-Type': 'text/plain'}
 
 if __name__ == '__main__':
-    start_http_server(5000)  # Start the metrics server on port 5000
-    app.run(host='0.0.0.0')   # Start the Flask app
+    # Start Prometheus metrics HTTP server
+    start_http_server(8000)  # Expose Prometheus metrics on port 8000
+    app.run(host='0.0.0.0', port=6000)  # Run Flask app on port 6000
