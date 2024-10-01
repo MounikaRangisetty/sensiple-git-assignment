@@ -11,4 +11,4 @@ route:
 receivers:
   - name: 'pagerduty'
     pagerduty_configs:
-      - service_key: 'cf8b4991a27b450dd0547747838ce6ab'  
+      - service_key: 'a8fead9e982c4c0ac0a68c615ceede85'  
