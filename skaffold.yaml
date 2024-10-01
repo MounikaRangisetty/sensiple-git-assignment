@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+build:
+  artifacts:
+    - image:  my-running-app--SRE
+      context: .
+      docker:
+        dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+      - my-python-app/*.yaml
