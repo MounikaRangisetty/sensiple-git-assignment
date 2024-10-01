@@ -18,6 +18,14 @@ groups:
     annotations:
       summary: "Service is down"
       description: "The service my_python_app is currently down."
+  - alert: ServiceDown
+    expr: up{job="my_python_app"} == 1
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Service is running"
+      description: "The service my_python_app is currently up."
 
 
 
