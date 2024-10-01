@@ -5,7 +5,7 @@ metadata:
 spec:
   source:
     git:
-      repo: "https://github.com/yourusername/your-repo.git"
+      repo: "https://github.com/MounikaRangisetty/sensiple-git-assignment.git"
       branch: "main"
       path: "path/to/your/manifests"
   policy:
