@@ -7,6 +7,6 @@ spec:
     git:
       repo: "https://github.com/MounikaRangisetty/sensiple-git-assignment.git"
       branch: "main"
-      path: "path/to/your/manifests"
+      path: "/manifests"
   policy:
     enable: true
