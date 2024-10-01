@@ -1,0 +1,12 @@
+apiVersion: configmanagement.gke.io/v1
+kind: ConfigManagement
+metadata:
+  name: config-management
+spec:
+  source:
+    git:
+      repo: "https://github.com/yourusername/your-repo.git"
+      branch: "main"
+      path: "path/to/your/manifests"
+  policy:
+    enable: true
