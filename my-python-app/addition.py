@@ -18,6 +18,10 @@ def index():
 def metrics():
     return generate_latest(), 200, {'Content-Type': 'text/plain'}
 
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({"status": "healthy"}), 200
+
 if __name__ == '__main__':
     # Start Prometheus metrics HTTP server
     start_http_server(8000)  # Expose Prometheus metrics on port 8000
