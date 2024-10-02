@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask, request, jsonify
+
 from prometheus_client import start_http_server, Summary, Counter, Gauge, generate_latest
 
 app = Flask(__name__)
