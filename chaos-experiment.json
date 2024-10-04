@@ -12,7 +12,7 @@
         "provider": {
           "type": "http",
           "timeout": 10,
-          "url": "http://your-service-url/health",
+          "url": "http://3.110.32.132:4000/health",
           "verify_tls": false
         }
       }
