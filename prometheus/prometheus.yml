@@ -4,7 +4,7 @@ global:
 alerting:
   alertmanagers:
     - static_configs:
-        - targets: ['localhost:9093']  # Address of your Alertmanager
+        - targets: ['localhost:9093']
 
 rule_files:
   - 'alert_rules.yml'  # Your alert rules file
@@ -12,4 +12,4 @@ rule_files:
 scrape_configs:
   - job_name: 'my_python_app'
     static_configs:
-      - targets: ['13.233.14.220:8000']  # Your application metrics endpoint
+      - targets: ['3.110.32.132:8000'] 
