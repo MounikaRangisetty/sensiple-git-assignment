@@ -1,19 +1,18 @@
 {
   "version": "1.0.0",
-  "title": "Kill a random application pod",
-  "description": "Terminate a pod in the deployment and observe system behavior",
+  "title": "Chaos experiment to test application resilience",
+  "description": "This experiment will cause an HTTP disruption to test application resilience.",
   "steady-state-hypothesis": {
-    "title": "The application service should be available",
+    "title": "Application should be healthy",
     "probes": [
       {
-        "type": "http",
-        "name": "Check application health",
+        "type": "probe",
+        "name": "application-is-healthy",
         "tolerance": 200,
         "provider": {
           "type": "http",
-          "timeout": 10,
-          "url": "http://3.110.32.132:4000/health",
-          "verify_tls": false
+          "url": "http://localhost:4000/health",
+          "timeout": 3
         }
       }
     ]
@@ -21,15 +20,14 @@
   "method": [
     {
       "type": "action",
-      "name": "Kill a random pod",
+      "name": "cause-http-failure",
       "provider": {
-        "type": "python",
-        "module": "chaosk8s.pod.actions",
-        "func": "kill_pod",
-        "arguments": {
-          "name": "my-python-app",
-          "namespace": "default"
-        }
+        "type": "process",
+        "path": "curl",
+        "arguments": [
+          "-X", "POST",
+          "http://localhost:4000/fail"
+        ]
       }
     }
   ],
