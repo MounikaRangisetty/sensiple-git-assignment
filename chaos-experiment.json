@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "title": "Kill a random application pod",
+  "description": "Terminate a pod in the deployment and observe system behavior",
+  "steady-state-hypothesis": {
+    "title": "The application service should be available",
+    "probes": [
+      {
+        "type": "http",
+        "name": "Check application health",
+        "tolerance": 200,
+        "provider": {
+          "type": "http",
+          "timeout": 10,
+          "url": "http://your-service-url/health",
+          "verify_tls": false
+        }
+      }
+    ]
+  },
+  "method": [
+    {
+      "type": "action",
+      "name": "Kill a random pod",
+      "provider": {
+        "type": "python",
+        "module": "chaosk8s.pod.actions",
+        "func": "kill_pod",
+        "arguments": {
+          "name": "my-python-app",
+          "namespace": "default"
+        }
+      }
+    }
+  ],
+  "rollbacks": []
+}
